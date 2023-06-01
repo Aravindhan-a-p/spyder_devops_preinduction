@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function for permissions
-set_permissions() {
+permissions() {
   local user=$1
   local file=$2
   sudo chown "$user:$user" "$file"
@@ -19,8 +19,8 @@ for i in {1..3}; do
  
   echo "Slot:  Wing:" | sudo tee "$home_dir/Available.txt"
   echo "Slot: Wing: Patient: " | sudo tee "$home_dir/Appointment.txt"
-   set_permissions "$username" "$home_dir/Available.txt"
-   set_permissions "$username" "$home_dir/Appointment.txt"
+   permissions "$username" "$home_dir/Available.txt"
+   permissions "$username" "$home_dir/Appointment.txt"
 done
 
 
@@ -34,8 +34,8 @@ for i in {1..3}; do
   
   echo "Slots: " | sudo tee "$home_dir/PatientDetails.txt"
   echo "Symptoms: " | sudo tee "$home_dir/Prescription.txt"
-  set_permissions "$username" "$home_dir/PatientDetails.txt"
-  set_permissions "$username" "$home_dir/Prescription.txt"
+  permissions "$username" "$home_dir/PatientDetails.txt"
+  permissions "$username" "$home_dir/Prescription.txt"
 done
 
 # Create usr wing admins
@@ -48,8 +48,8 @@ for admin in "${wing_admins[@]}"; do
   sudo mkdir "$home_dir/Doctor"
    echo "InPatient.txt" | sudo tee "$home_dir/Patient/InPatient.txt"
    echo "InDoctor.txt" | sudo tee "$home_dir/Doctor/InDoctor.txt"
-  set_permissions "$admin" "$home_dir/Patient/InPatient.txt"
-  set_permissions "$admin" "$home_dir/Doctor/InDoctor.txt"
+  permissions "$admin" "$home_dir/Patient/InPatient.txt"
+  permissions "$admin" "$home_dir/Doctor/InDoctor.txt"
 done
 
 
