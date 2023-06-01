@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function to set permissions
-set_permissions() {
+permissions() {
   local user=$1
   local file=$2
   sudo chown "$user:$user" "$file"
