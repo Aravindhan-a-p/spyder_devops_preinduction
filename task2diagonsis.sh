@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function for permissions
-set_permissions() {
+permissions() {
   local user=$1
   local file=$2
   sudo chown "$user:$user" "$file"
@@ -22,11 +22,11 @@ read -p "Enter dinner medicine: " dinner_med
 doctor_home="/home/$doctor_username"
 patient_home="/home/$patient_username"
 echo "Diagnosis: $diagnosis, Date and Time: $diagnosis_datetime" | sudo tee "$patient_home/PatientDetails.txt"
-set_permissions "$doctor_username" "$patient_home/PatientDetails.txt"
+permissions "$doctor_username" "$patient_home/PatientDetails.txt"
 
 # Update Prescription.txt
 echo "Morning: $morning_med" | sudo tee "$patient_home/Prescription.txt"
 echo "Afternoon: $afternoon_med" | sudo tee "$patient_home/Prescription.txt"
 echo "Dinner: $dinner_med" | sudo tee "$patient_home/Prescription.txt"
-set_permissions "$doctor_username" "$patient_home/Prescription.txt"
+permissions "$doctor_username" "$patient_home/Prescription.txt"
 
